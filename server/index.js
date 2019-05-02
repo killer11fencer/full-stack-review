@@ -18,5 +18,11 @@ app.use(session({
 massive(CONNECTION_STRING).then(db=>{
     app.set('db',db);
     console.log('database set')
+    console.log(db.listTables());
     app.listen(SERVER_PORT,()=>console.log('Listening on Port', SERVER_PORT))
 }).catch(err=>console.log('err on massive',err))
+
+app.get('/api/users',(req,res)=> {
+    const db = req.app.get('db')
+    db.getAllUsers().then(result=>res.status(200).send(result))
+})
