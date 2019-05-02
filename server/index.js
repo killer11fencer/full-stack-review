@@ -4,6 +4,7 @@ const massive = require('massive')
 const app = express()
 const session = require('express-session')
 const {SERVER_PORT,SESSION_SECRET,CONNECTION_STRING} = process.env
+const ctrl = require('./controller')
 
 app.use(express.json())
 app.use(session({
@@ -22,7 +23,7 @@ massive(CONNECTION_STRING).then(db=>{
     app.listen(SERVER_PORT,()=>console.log('Listening on Port', SERVER_PORT))
 }).catch(err=>console.log('err on massive',err))
 
-app.get('/api/users',(req,res)=> {
-    const db = req.app.get('db')
-    db.getAllUsers().then(result=>res.status(200).send(result))
-})
+app.get('/api/users',ctrl.getAllUsers)
+app.post('/auth/register',ctrl.register)
+
+
