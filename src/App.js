@@ -1,21 +1,21 @@
+
 import React from 'react';
+
 import {Provider} from 'react-redux'
-import './App.css';
 import store from './redux/store'
 import {HashRouter} from 'react-router-dom'
-import router from './router'
 import Navbar from './components/Navbar'
+import router from './router'
 
 function App() {
-  return (
-
-    <Provider store={store}>
-    <HashRouter>
-      <Navbar/>
-      {router}
-      </HashRouter>
-      </Provider>
-  );
-  }
+ return (
+   <Provider store={store}>
+     <HashRouter>
+       <Navbar />
+       {router}
+     </HashRouter>
+   </Provider>
+ );
+}
 
 export default App;
